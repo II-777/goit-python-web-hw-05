@@ -2,6 +2,7 @@ import aiohttp
 import asyncio
 import datetime
 import json
+import sys
 from rich.console import Console
 from rich.table import Table
 from rich import box
@@ -56,12 +57,12 @@ def create_table(data):
                     f"{values['purchase']:.4f}"
                 )
 
+    table.row_styles = ["", "dim"]
     return table
 
 
 def main():
-    num_days = int(
-        input("Enter the number of days to fetch (up to 10): ") or 1)
+    num_days = int(sys.argv[1]) if len(sys.argv) > 1 else 1
     num_days = min(num_days, 10)
 
     today = datetime.date.today()
